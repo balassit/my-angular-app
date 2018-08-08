@@ -1,24 +1,33 @@
 
-FROM node:10.8.0
+FROM node:10.8.0-alpine
 
-
-# Puppeteer dependencies, from: https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
-
-# See https://crbug.com/795759
-RUN apt-get update && apt-get install -yq libgconf-2-4
-
-# Install latest chrome dev package and fonts to support major charsets (Chinese, Japanese, Arabic, Hebrew, Thai and a few others)
-# Note: this installs the necessary libs to make the bundled version of Chromium that Puppeteer
-# installs, work.
-RUN apt-get update && apt-get install -y wget --no-install-recommends \
-    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
-    && apt-get update \
-    && apt-get install -y google-chrome-unstable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst ttf-freefont \
-      --no-install-recommends \
+# Update apk repositories & install chromium
+RUN echo "http://dl-2.alpinelinux.org/alpine/edge/main" > /etc/apk/repositories \
+    && echo "http://dl-2.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+    && echo "http://dl-2.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+    && apk -U --no-cache \
+    add \
+    zlib-dev \
+    chromium \
+    xvfb \
+    wait4ports \
+    xorg-server \
+    dbus \
+    ttf-freefont \
+    grep \ 
+    udev \
+    && apk del --purge --force linux-headers binutils-gold gnupg zlib-dev libc-utils \
     && rm -rf /var/lib/apt/lists/* \
-    && apt-get purge --auto-remove -y curl \
-    && rm -rf /src/*.deb
+    /var/cache/apk/* \
+    /usr/share/man \
+    /tmp/* \
+    /usr/lib/node_modules/npm/man \
+    /usr/lib/node_modules/npm/doc \
+    /usr/lib/node_modules/npm/html \
+    /usr/lib/node_modules/npm/scripts
+
+ENV CHROME_BIN=/usr/bin/chromium-browser \
+    CHROME_PATH=/usr/lib/chromium/
 
 WORKDIR /app
 
