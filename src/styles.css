@@ -9,8 +9,7 @@ html {
 
 body {
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    margin: 2rem auto;
-    padding: 1rem 1rem;
+    margin: 0 auto;
 }
 
 /* Prevent scroll on narrow devices */
