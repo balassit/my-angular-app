@@ -1,1 +1,122 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+html {
+    height: 100%;
+    color: #222;
+    line-height: 1.4em;
+}
+
+body {
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    margin: 2rem auto;
+    padding: 1rem 1rem;
+}
+
+/* Prevent scroll on narrow devices */
+html, body {
+    font-size: 1em;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    letter-spacing: -.025rem;
+}
+ 
+h1 {
+    text-align: center;
+}
+ 
+label {
+    font-size:1.4rem;
+}
+
+header {
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+main {
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wrap {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+
+.page {
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+p {
+    font-size: 1em;
+    line-height: 1.4em;
+}
+
+footer {
+    border-top: 1px solid #d5d5d5;
+    font-size: .8em;
+}
+ 
+.container {
+    max-width: 28rem;
+}
+ 
+@media (min-width: 38em) {
+    img {
+      max-width: 35rem;
+    }
+    .container {
+      max-width: 35rem;
+    }
+}
+ 
+@media (min-width: 56em) {
+    img {
+     max-width: 38rem;
+    }
+    .container {
+      max-width: 38rem;
+    }
+}
+ 
+ /* Pure CSS modification*/
+ #contactform fieldset div input, #contactform fieldset div textarea{
+     width: 35rem;
+ }
+ 
+ 
+ /* mobile devices */
+ @media only screen
+ and (min-device-width : 320px)
+ and (max-device-width : 35rem) {
+   /* Pure CSS modification*/
+   #contactform fieldset div input, #contactform fieldset div textarea{
+     width: 100%;
+   }
+   header{
+   }
+   footer {
+   }
+   @-ms-viewport{
+       width: device-width;
+       initial-scale: 1;
+       maximum-scale: 1;
+       user-scalable: no;
+   }
+ }
+ 
+ /* large devices */
+ @media only screen and (min-device-width: 35rem) {
+ 
+ }

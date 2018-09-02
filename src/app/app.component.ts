@@ -1,11 +1,22 @@
 import { Component } from '@angular/core';
 import { environment } from '../environments/environment';
+import { Router, NavigationEnd } from '@angular/router';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'my-angular-project';
-  production = environment.production;
+  constructor(private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        window.scrollTo(0, 0);
+      }
+    });
+  }
+
+  getHomeClass(): string {
+    return (this.router.url === '/') ? 'header--home' : '';
+  }
 }
