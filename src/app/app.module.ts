@@ -13,6 +13,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+import { EmailFormComponent } from './email-form/email-form.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { HomeComponent } from './home/home.component';
     FooterComponent,
     HeaderComponent,
     HomeComponent,
+    AboutComponent,
+    EmailFormComponent
   ],
   imports: [
     BrowserModule,
