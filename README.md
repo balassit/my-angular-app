@@ -30,6 +30,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Docker 
 
 ```
+docker build -t balassit/node-frontend:10.8.0 docker/node-frontend
+docker push balassit/node-frontend:10.8.0 
+```
+
+```
 docker build -t balassit/my-angular-project:dev --build-arg configuration="" .
 docker build -t balassit/my-angular-project:prod .
 docker run -p 80:80 balassit/my-angular-project:prod
