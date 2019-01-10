@@ -11,8 +11,8 @@ action "Docker Build App Prod" {
 
 # Filter for master branch
 action "master-branch-filter" {
-  needs = "Docker Build App Prod"
   uses = "actions/bin/filter@master"
+  needs = ["Docker Build App Prod"]
   args = "branch master"
 }
 
