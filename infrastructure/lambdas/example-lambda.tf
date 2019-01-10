@@ -1,6 +1,5 @@
-
 provider "aws" {
-  region  = "${var.aws_region}"
+  region = "${var.aws_region}"
 }
 
 resource "aws_lambda_function" "example_lambda" {
@@ -13,7 +12,6 @@ resource "aws_lambda_function" "example_lambda" {
   timeout          = 15
   memory_size      = 128
   publish          = true
-  reserved_concurrent_executions = "${var.reserved_concurrent_executions}"
 
   vpc_config {
     security_group_ids = ["${split(",", var.security_groups)}"]
