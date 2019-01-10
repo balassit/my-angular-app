@@ -1,14 +1,10 @@
-workflow "New workflow" {
-  on = "push"
+workflow "Docker Deploy" {
   resolves = [
-    "Docker Login",
+    "Build",
     "Deploy to Docker",
+    "Docker Login"
   ]
-}
-
-action "docker build app prod" {
-  uses = "actions/docker/cli@76ff57a6c3d817840574a98950b0c7bc4e8a13a8"
-  runs = "docker build -t balassit/my-angular-project:prod ."
+  on = "push"
 }
 
 action "Docker Login" {
@@ -16,8 +12,13 @@ action "Docker Login" {
   secrets = ["DOCKER_USERNAME", "DOCKER_PASSWORD"]
 }
 
+action "Build" {
+  uses = "actions/docker/cli@76ff57a6c3d817840574a98950b0c7bc4e8a13a8"
+  runs = "docker build -t balassit/my-angular-project:prod ."
+}
+
 action "Deploy to Docker" {
   uses = "actions/docker/cli@76ff57a6c3d817840574a98950b0c7bc4e8a13a8"
-  needs = ["docker build app prod", "Docker Login"]
+  needs = ["Build", "Docker Login"]
   runs = "docker push balassit/my-angular-project:prod"
 }
