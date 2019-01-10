@@ -1,11 +1,17 @@
-workflow "Terraform" {
-  resolves = "terraform-plan"
+workflow "Terraform and App Build" {
+  resolves = ["Build", "terraform-plan"]
   on = "pull_request"
 }
 
 action "filter-to-pr-open-synced" {
   uses = "actions/bin/filter@master"
   args = "action 'opened|synchronize'"
+}
+
+action "Build" {
+  uses = "actions/docker/cli@76ff57a6c3d817840574a98950b0c7bc4e8a13a8"
+  needs = ["filter-to-pr-open-synced"]
+  runs = "docker build -t balassit/my-angular-project:prod ."
 }
 
 action "terraform-fmt" {
