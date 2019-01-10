@@ -1,6 +1,7 @@
 terraform {
   backend "s3" {
-    key     = "example-lambda"
-    encrypt = "true"
+    bucket = "terraform-us-east-1"
+    key    = "example-lambda"
+    region = "us-east-1"
   }
 }
