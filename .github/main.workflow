@@ -1,5 +1,8 @@
 workflow "Docker Deploy" {
-  resolves = ["Deploy to Docker"]
+  resolves = [
+    "Build",
+    "Deploy to Docker"
+  ]
   on = "push"
 }
 
@@ -8,20 +11,21 @@ action "filter-to-branch-master" {
   args = "branch master"
 }
 
-action "docker build app prod" {
-  uses = "actions/docker/cli@76ff57a6c3d817840574a98950b0c7bc4e8a13a8"
-  needs = ["filter-to-branch-master"]
-  runs = "docker build -t balassit/my-angular-project:prod ."
-}
-
 action "Docker Login" {
   uses = "actions/docker/login@76ff57a6c3d817840574a98950b0c7bc4e8a13a8"
-  needs = ["docker build app prod"]
+  needs = [
+    "filter-to-branch-master",
+  ]
   secrets = ["DOCKER_USERNAME", "DOCKER_PASSWORD"]
+}
+
+action "Build" {
+  uses = "actions/docker/cli@76ff57a6c3d817840574a98950b0c7bc4e8a13a8"
+  runs = "docker build -t balassit/my-angular-project:prod ."
 }
 
 action "Deploy to Docker" {
   uses = "actions/docker/cli@76ff57a6c3d817840574a98950b0c7bc4e8a13a8"
-  needs = ["Docker Login"]
+  needs = ["Docker Login", "filter-to-branch-master"]
   runs = "docker push balassit/my-angular-project:prod"
 }
