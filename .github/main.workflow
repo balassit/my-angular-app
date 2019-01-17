@@ -2,20 +2,19 @@
 
 workflow "Docker Deploy" {
   resolves = [
-    "Deploy to Docker"
+    "Deploy to Docker",
+    "Build",
+    "Docker Login"
   ]
   on = "push"
+}action "filter-to-branch-master" {
+  uses = "actions/bin/filter@master"
+  args = "branch master"
 }
 
 action "Build" {
   uses = "actions/docker/cli@76ff57a6c3d817840574a98950b0c7bc4e8a13a8"
   runs = "docker build -t balassit/my-angular-project:prod ."
-}
-
-action "filter-to-branch-master" {
-  uses = "actions/bin/filter@master"
-  needs = ["Build"]
-  args = "branch master"
 }
 
 action "Docker Login" {
