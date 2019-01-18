@@ -1,5 +1,3 @@
-# Build and Deploy App on Push
-
 workflow "Docker Deploy" {
   resolves = [
     "Build",
