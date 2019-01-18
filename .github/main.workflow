@@ -1,7 +1,7 @@
 workflow "Docker Deploy" {
   resolves = [
     "Build",
-    "filter-on-actor",
+    "filter-on-actor", 
   ]
   on = "push"
 }
