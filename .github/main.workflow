@@ -7,9 +7,8 @@ workflow "Docker Deploy" {
   on = "push"
 }
 
-action "filter-to-branch-master" {
+action "filter-on-actor" {
   uses = "balassit/bin/filter@master"
-  needs = ["Build"]
   args = "actor octocat|torvalds"
 }
 
