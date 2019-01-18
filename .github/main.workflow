@@ -10,7 +10,7 @@ workflow "Docker Deploy" {
 
 action "filter-on-actor" {
   uses = "balassit/bin/filter@master"
-  args = "actor octocat|torvalds"
+  args = "actor balassit"
 }
 
 action "Build" {
