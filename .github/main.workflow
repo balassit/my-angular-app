@@ -2,7 +2,8 @@
 
 workflow "Docker Deploy" {
   resolves = [
-    "Build"
+    "Build",
+    "filter-on-actor",
   ]
   on = "push"
 }
@@ -14,6 +15,6 @@ action "filter-on-actor" {
 
 action "Build" {
   uses = "actions/docker/cli@76ff57a6c3d817840574a98950b0c7bc4e8a13a8"
-  needs = ["filter-to-branch-master"]
+  needs = ["filter-on-actor"]
   runs = "docker build -t balassit/my-angular-project:prod ."
 }
